@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Farm File Management";
+}
+
+<div class="container mt-4">
+
+    <h2>Farm File Management</h2>
+
+    <p>
+        Upload farm reports, images, and documents
+        to Azure Blob Storage.
+    </p>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form asp-controller="FarmFiles"
+                  asp-action="Upload"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Select Farm File
+                    </label>
+
+                    <input type="file"
+                           name="file"
+                           class="form-control"
+                           required />
+                </div>
+
+                <button type="submit"
+                        class="btn btn-primary">
+                    Upload File
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
